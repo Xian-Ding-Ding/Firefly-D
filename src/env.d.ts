@@ -4,6 +4,10 @@
 declare global {
 	interface ImportMetaEnv {
 		readonly MEILI_MASTER_KEY: string;
+		readonly PUBLIC_UMAMI_WEBSITE_ID?: string;
+		readonly PUBLIC_UMAMI_SCRIPT_URL?: string;
+		readonly PUBLIC_UMAMI_DASHBOARD_URL?: string;
+		readonly PUBLIC_UMAMI_SHARE_URL?: string;
 	}
 
 	interface ITOCManager {

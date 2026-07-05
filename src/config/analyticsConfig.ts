@@ -1,5 +1,7 @@
 import type { AnalyticsConfig } from "../types/analyticsConfig";
 
+const env = import.meta.env ?? {};
+
 export const analyticsConfig: AnalyticsConfig = {
 	// Google Analytics ID
 	googleAnalyticsId: "",
@@ -8,9 +10,19 @@ export const analyticsConfig: AnalyticsConfig = {
 	// Umami 统计配置
 	umamiAnalytics: {
 		// Umami Website ID
-		websiteId: "",
+		websiteId:
+			env.PUBLIC_UMAMI_WEBSITE_ID ??
+			"e34b75ad-a690-4b6e-9cd4-9aeee423c34c",
 		// Umami JS地址，支持使用自建
-		scriptUrl: "https://cloud.umami.is/script.js",
+		scriptUrl:
+			env.PUBLIC_UMAMI_SCRIPT_URL ??
+			"https://umami-dreamer7.vercel.app/script.js",
+		// Umami 后台地址
+		dashboardUrl:
+			env.PUBLIC_UMAMI_DASHBOARD_URL ??
+			"https://umami-dreamer7.vercel.app/websites",
+		// Umami 公开统计分享地址，在 Umami 后台开启 Share URL 后填入
+		shareUrl: env.PUBLIC_UMAMI_SHARE_URL ?? "",
 		// Umami 会话回放脚本地址，支持使用自建
 		replaysScriptUrl: "https://cloud.umami.is/recorder.js",
 		// 是否追踪出站链接

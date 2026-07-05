@@ -53,7 +53,34 @@ const replaysBlockSelector = replays?.blockSelector?.trim();
 			data-block-selector={replaysBlockSelector || undefined}
 		/>
 	)
-}
+	}
+
+<script is:inline data-swup-ignore-script>
+	;(() => {
+		let lastTrackedPath = `${window.location.pathname}${window.location.search}`
+		let swupBound = false
+
+		const trackPageView = () => {
+			const path = `${window.location.pathname}${window.location.search}`
+			if (path === lastTrackedPath) return
+			lastTrackedPath = path
+
+			if (window.umami?.track) {
+				window.umami.track(path)
+			}
+		}
+
+		const bindSwupTracking = () => {
+			if (swupBound || !window.swup?.hooks) return
+			swupBound = true
+			window.swup.hooks.on('page:view', trackPageView)
+		}
+
+		document.addEventListener('astro:page-load', trackPageView)
+		document.addEventListener('swup:enable', bindSwupTracking, { once: true })
+		bindSwupTracking()
+	})()
+</script>
 
 {
 	trackOutboundLinks && (

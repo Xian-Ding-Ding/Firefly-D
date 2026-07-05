@@ -4,6 +4,16 @@ import {
 	type NavBarSearchConfig,
 	NavBarSearchMethod,
 } from "../types/navBarConfig";
+import { analyticsConfig } from "./analyticsConfig";
+
+const getUmamiStatsUrl = () => {
+	const umami = analyticsConfig.umamiAnalytics;
+	if (umami?.shareUrl) return umami.shareUrl;
+	if (umami?.dashboardUrl && umami.websiteId) {
+		return `${umami.dashboardUrl}/${umami.websiteId}`;
+	}
+	return "#";
+};
 
 // ============================================================================
 // 导航栏配置 - 根据顺序动态生成导航栏链接
@@ -72,16 +82,8 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 		children: [
 			// 关于页面
 			LinkPresets.About,
-		],
-	});
 
-	// 自定义导航栏链接
-	links.push({
-		name: "链接",
-		url: "#",
-		icon: "material-symbols:link",
-		// 子菜单
-		children: [
+			// GitHub
 			{
 				name: "GitHub",
 				url: "https://github.com/Xian-Ding-Ding",
@@ -90,6 +92,9 @@ const getDynamicNavBarConfig = (): NavBarConfig => {
 			},
 		],
 	});
+
+	// 统计
+	links.push(LinkPresets.Stats);
 
 	// 文档链接
 	// links.push({
@@ -131,6 +136,12 @@ export const LinkPresets: Record<string, NavBarLink> = {
 		name: "标签",
 		url: "/tags/",
 		icon: "material-symbols:tag-rounded",
+	},
+	Stats: {
+		name: "统计",
+		url: getUmamiStatsUrl(),
+		external: true,
+		icon: "material-symbols:query-stats-rounded",
 	},
 	Notes: {
 		name: "学习库",

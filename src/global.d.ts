@@ -74,6 +74,12 @@ declare global {
 			) => void;
 			loadTrack: (index: number, autoPlay: boolean) => void;
 		};
+		umami?: {
+			track: (
+				eventOrUrl?: string | Record<string, unknown>,
+				eventData?: Record<string, unknown>,
+			) => void;
+		};
 	}
 
 	interface MediaQueryList {
