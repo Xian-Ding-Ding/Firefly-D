@@ -200,9 +200,6 @@ grep irreducible OUTCAR / grep NKPTS OUTCAR
 
 电子步迭代结束输出的主要结果:费米能级以及能带信息
 
-
-<br/>
-
 # 二、VASP静态自洽计算(电子自洽scf)
 
 
@@ -417,9 +414,6 @@ export PATH=$PATH:/home/edu/scf (输出路径)
 mpirun -np 4 vasp_std (使用4核cpu计算)
 ```
 
-
-<br/>
-
 # 四、差分电荷密度、ELF、bader分析
 
 
@@ -517,10 +511,6 @@ grep ZVAL POTCAR
 7. 制作其他计算输入文件。
 8. 分别或批量提交计算任务即可。
 
- 
-<br/>
-
-
 # 五、吸附能计算
 
 
@@ -536,9 +526,6 @@ grep ZVAL POTCAR
 $$
 E_{\mathrm{ads}}=E_{\mathrm{total}}-E_{\mathrm{slab}}-E_{\mathrm{adsorbent}}
 $$
-
-<br/>
-
 
 # 六、过渡态计算(CINEB方法)
 
@@ -612,9 +599,6 @@ EDIFFG = -0.02 (或者不设置)
 
 将初始和末态结构计算得到的OUTCAR分别拷贝到00和03文件夹中,输入nebresults.pl得相关结果文件,nebef.dat,第二列即为最大受力,第三列为相应结构的能量,neb.dat文件第二列为距离,第三列为能量(以初态能量为参考值),第四列为力,将neb.dat下载到本地,导入origin绘图
 
-<br/>
-
-
 # 七、COHP计算
 
 
@@ -646,10 +630,6 @@ POTIM = 0.5
 ISYM = -1 (对称性,要用-1,0也可)
 NBANDS = 200 (需要设置的比平时高一点,1.5~2倍结构优化时的该默认值)
 ```
-
-<br/>
-<br/>
-
 
 # 八、脚本提交vasp计算
 

@@ -185,8 +185,6 @@ SMD会额外给出非静电贡献(Dispersion, Cavitation等)
 
 保存后提交Gaussian计算 => results,IRC/path查看IRC曲线(第一个点和最后一个点是最接近产物和反应物的结构)
 
--------
-
 # Gaussian 16W
 
 ## 运行 Gaussian 16W

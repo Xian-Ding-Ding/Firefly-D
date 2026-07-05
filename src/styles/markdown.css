@@ -13,6 +13,21 @@
     @apply text-3xl;
   }
 
+  > section:not(:first-of-type) > h1:first-child {
+    position: relative;
+    margin-top: 1.75rem;
+    padding-top: 1.5rem;
+  }
+
+  > section:not(:first-of-type) > h1:first-child::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    border-top: 1px dashed color-mix(in srgb, var(--line-color) 42%, transparent);
+  }
+
   h1,
   h2,
   h3,
@@ -213,4 +228,3 @@ body.wallpaper-transparent .custom-md {
     background-color: color-mix(in oklch, var(--btn-plain-bg-active) 68%, transparent);
   }
 }
-
