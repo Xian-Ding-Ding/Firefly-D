@@ -12,7 +12,7 @@ export const profileConfig: ProfileConfig = {
 	name: "Dreamer",
 
 	// 个人签名
-	bio: "反应工程 / VASP / 计算化学笔记整理中",
+	bio: "化学工程/计算化学/机器学习笔记整理中",
 
 	// 链接配置
 	// 已经预装的图标集：fa7-brands，fa7-regular，fa7-solid，material-symbols，simple-icons

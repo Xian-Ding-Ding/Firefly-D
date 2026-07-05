@@ -139,7 +139,8 @@ export const LinkPresets: Record<string, NavBarLink> = {
 	},
 	Videos: {
 		name: "视频讲解",
-		url: "/videos/",
+		url: "https://space.bilibili.com/1799296979?spm_id_from=333.1007.0.0",
+		external: true,
 		icon: "material-symbols:play-circle-outline-rounded",
 	},
 	Friends: {

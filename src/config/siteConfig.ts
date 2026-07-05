@@ -9,22 +9,26 @@ export const siteConfig: SiteConfig = {
 	title: "Dreamer的小站",
 
 	// 站点副标题
-	subtitle: "反应工程、VASP 与计算化学学习库",
+	subtitle: "",
 
 	// 站点 URL
 	site_url: "https://xian-ding-ding.github.io/Firefly-D",
 
 	// 站点描述
 	description:
-		"整理反应工程、VASP、计算化学与科研工具链的个人博客，沉淀 Markdown 笔记、视频讲解和学习资料。",
+		"化学工程、计算化学和机器学习笔记整理中的个人博客。",
 
 	// 站点关键词
 	keywords: [
-		"反应工程",
+		"化学工程",
 		"VASP",
+		"Gaussian",
 		"计算化学",
+		"机器学习",
+		"XGBoost",
+		"CNN",
+		"Transformer",
 		"科研笔记",
-		"Markdown",
 		"视频讲解",
 		"个人博客",
 	],

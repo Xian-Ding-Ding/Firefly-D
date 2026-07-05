@@ -1,86 +1,26 @@
 ---
 import { Icon } from "astro-icon/components";
 import MainGridLayout from "@/layouts/MainGridLayout.astro";
-import { url } from "@/utils/url-utils";
 
-const videoLessons = [
-	{
-		title: "反应工程：停留时间与反应器选择",
-		topic: "反应工程",
-		description: "用于放置你自己的课程讲解视频，可替换为本地 mp4 或 B 站嵌入地址。",
-		type: "placeholder",
-		src: "",
-		poster: "",
-	},
-	{
-		title: "VASP 入门：结构优化计算流程",
-		topic: "VASP",
-		description: "建议放置 POSCAR、INCAR、KPOINTS、POTCAR 到结果分析的完整讲解。",
-		type: "embed",
-		src: "//player.bilibili.com/player.html?bvid=BV1fK4y1s7Qf&p=1&autoplay=0",
-		poster: "",
-	},
-];
+const bilibiliUrl =
+	"https://space.bilibili.com/1799296979?spm_id_from=333.1007.0.0";
 ---
 
-<MainGridLayout title="视频讲解" description="反应工程、VASP 与科研流程视频讲解">
+<MainGridLayout title="视频讲解" description="Dreamer 的 B 站视频讲解">
 	<section class="video-hero onload-animation">
 		<div>
 			<p>Video Lessons</p>
 			<h1>视频讲解</h1>
-			<span>
-				把你的视频放到 <code>public/assets/videos/</code>，再在
-				<code>src/pages/videos.astro</code> 的 <code>videoLessons</code> 数组里登记。
-			</span>
+			<span>视频讲解会持续更新在 B 站空间。</span>
 		</div>
-		<a href={url("/notes/")}>
-			<Icon is:inline name="material-symbols:menu-book-outline-rounded" />
-			配套笔记
+		<a href={bilibiliUrl} target="_blank" rel="noopener noreferrer">
+			<Icon is:inline name="material-symbols:play-circle-outline-rounded" />
+			B 站视频讲解
 		</a>
-	</section>
-
-	<section class="video-grid onload-animation">
-		{videoLessons.map((video) => (
-			<article class="video-card">
-				<div class="video-frame">
-					{video.type === "embed" ? (
-						<iframe
-							src={video.src}
-							title={video.title}
-							loading="lazy"
-							allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-							allowfullscreen
-						/>
-					) : video.type === "local" ? (
-						<video controls preload="metadata" poster={video.poster || undefined}>
-							<source src={video.src} type="video/mp4" />
-						</video>
-					) : (
-						<div class="video-placeholder">
-							<Icon is:inline name="material-symbols:upload-file-outline-rounded" />
-							<strong>等待上传视频</strong>
-							<span>把 mp4 放到 public/assets/videos 后改为 local 类型</span>
-						</div>
-					)}
-				</div>
-				<div class="video-body">
-					<span>{video.topic}</span>
-					<h2>{video.title}</h2>
-					<p>{video.description}</p>
-				</div>
-			</article>
-		))}
 	</section>
 </MainGridLayout>
 
 <style>
-	.video-hero,
-	.video-card {
-		border: 1px solid var(--line-color);
-		border-radius: 0.75rem;
-		background: var(--card-bg);
-	}
-
 	.video-hero {
 		display: flex;
 		align-items: center;
@@ -88,6 +28,8 @@ const videoLessons = [
 		gap: 1.5rem;
 		padding: 1.5rem;
 		margin-bottom: 1rem;
+		border: 1px solid var(--line-color);
+		border-radius: 0.75rem;
 		background:
 			linear-gradient(135deg, color-mix(in srgb, var(--primary) 10%, transparent), transparent 45%),
 			var(--card-bg);
@@ -114,13 +56,6 @@ const videoLessons = [
 		line-height: 1.7;
 	}
 
-	.video-hero code {
-		color: var(--btn-content);
-		background: var(--btn-regular-bg);
-		padding: 0.1rem 0.35rem;
-		border-radius: 0.35rem;
-	}
-
 	.video-hero a {
 		display: inline-flex;
 		align-items: center;
@@ -134,92 +69,10 @@ const videoLessons = [
 		text-decoration: none;
 	}
 
-	.video-grid {
-		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 1rem;
-	}
-
-	.video-card {
-		overflow: hidden;
-	}
-
-	.video-frame {
-		aspect-ratio: 16 / 9;
-		background: color-mix(in srgb, var(--deep-text) 12%, transparent);
-	}
-
-	.video-frame iframe,
-	.video-frame video {
-		display: block;
-		width: 100%;
-		height: 100%;
-		border: 0;
-		object-fit: cover;
-	}
-
-	.video-placeholder {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		flex-direction: column;
-		gap: 0.45rem;
-		width: 100%;
-		height: 100%;
-		color: var(--btn-content);
-		background:
-			linear-gradient(135deg, color-mix(in srgb, var(--primary) 14%, transparent), transparent),
-			color-mix(in srgb, var(--btn-regular-bg) 80%, transparent);
-		text-align: center;
-		padding: 1rem;
-	}
-
-	.video-placeholder svg {
-		font-size: 2rem;
-	}
-
-	.video-placeholder strong {
-		color: var(--deep-text);
-	}
-
-	.video-placeholder span {
-		color: var(--content-meta);
-		font-size: 0.85rem;
-		line-height: 1.5;
-	}
-
-	.video-body {
-		padding: 1rem;
-	}
-
-	.video-body span {
-		color: var(--btn-content);
-		font-size: 0.78rem;
-		font-weight: 800;
-	}
-
-	.video-body h2 {
-		margin: 0.35rem 0 0;
-		color: var(--deep-text);
-		font-size: 1.05rem;
-		line-height: 1.4;
-	}
-
-	.video-body p {
-		margin: 0.55rem 0 0;
-		color: var(--content-meta);
-		font-size: 0.9rem;
-		line-height: 1.7;
-	}
-
 	@media (max-width: 860px) {
 		.video-hero {
 			align-items: flex-start;
 			flex-direction: column;
-		}
-
-		.video-grid {
-			grid-template-columns: 1fr;
 		}
 	}
 </style>

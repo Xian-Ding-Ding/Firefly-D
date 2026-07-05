@@ -89,8 +89,8 @@ export const backgroundWallpaper: BackgroundWallpaperConfig = {
 			// 主页横幅副标题
 			subtitle: [
 				"化学工程博士在读",
-				"课程及科研笔记分享",
-				"各种计算模拟软件资料库",
+				"化学工程/计算化学笔记整理中",
+				"机器学习与科研工具链学习记录",
 			],
 			// 主页横幅副标题字体大小
 			subtitleSize: "1.5rem",

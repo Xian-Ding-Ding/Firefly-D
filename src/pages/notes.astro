@@ -23,32 +23,53 @@ const notePosts = posts.filter((post) => {
 	].some((keyword) => haystack.includes(keyword.toLowerCase()));
 });
 
-const categories = [
+const libraryGroups = [
 	{
-		title: "VASP",
+		title: "化学工程",
 		icon: "material-symbols:folder-outline",
-		description: "INCAR、KPOINTS、POTCAR、结构优化与常见报错。",
-		href: url("/archive/?tag=VASP"),
+		description: "专业课程笔记与知识框架整理。",
+		items: [
+			{ title: "反应工程", href: url("/archive/?tag=反应工程") },
+			{ title: "化工原理", href: url("/archive/?tag=化工原理") },
+			{ title: "物理化学", href: url("/archive/?tag=物理化学") },
+			{ title: "化工热力学", href: url("/archive/?tag=化工热力学") },
+			{ title: "传递过程", href: url("/archive/?tag=传递过程") },
+			{ title: "分离工程", href: url("/archive/?tag=分离工程") },
+		],
 	},
 	{
 		title: "计算化学",
-		icon: "material-symbols:label-outline",
-		description: "DFT、表面吸附、能垒计算与数据处理流程。",
-		href: url("/archive/?tag=计算化学"),
+		icon: "material-symbols:science-outline",
+		description: "Gaussian、VASP、MS 等计算模拟资料。",
+		items: [
+			{ title: "VASP", href: url("/archive/?tag=VASP") },
+			{ title: "Gaussian", href: url("/archive/?tag=Gaussian") },
+		],
+	},
+	{
+		title: "机器学习",
+		icon: "material-symbols:psychology-outline",
+		description: "传统机器学习与模型算法学习记录。",
+		items: [
+			{ title: "随机森林", href: url("/archive/?tag=随机森林") },
+			{ title: "逻辑回归", href: url("/archive/?tag=逻辑回归") },
+			{ title: "线性回归", href: url("/archive/?tag=线性回归") },
+			{ title: "KMeans", href: url("/archive/?tag=KMeans") },
+			{ title: "PCA", href: url("/archive/?tag=PCA") },
+			{ title: "SVM", href: url("/archive/?tag=SVM") },
+			{ title: "朴素贝叶斯", href: url("/archive/?tag=朴素贝叶斯") },
+			{ title: "XGBoost", href: url("/archive/?tag=XGBoost") },
+		],
 	},
 ];
 ---
 
-<MainGridLayout title="学习库" description="Markdown 科研笔记、反应工程与 VASP 学习资料">
+<MainGridLayout title="学习库" description="化学工程、计算化学和机器学习笔记资料">
 	<section class="research-hero onload-animation">
 		<div>
 			<p class="research-eyebrow">Markdown Notes</p>
 			<h1>学习库</h1>
-			<p>
-				这里集中放你自己整理的 Markdown 笔记。把文件放到
-				<code>src/content/posts/notes/</code>
-				，并在 frontmatter 里写上分类或标签，页面会自动收录。
-			</p>
+			<p>这里集中了化学工程专业课程、计算化学软件、机器学习算法的markdown笔记</p>
 		</div>
 		<div class="research-hero-stat">
 			<span>{notePosts.length}</span>
@@ -56,13 +77,25 @@ const categories = [
 		</div>
 	</section>
 
-	<section class="research-topic-grid onload-animation">
-		{categories.map((item) => (
-			<a class="research-topic-card" href={item.href}>
-				<Icon is:inline name={item.icon} />
-				<strong>{item.title}</strong>
-				<span>{item.description}</span>
-			</a>
+	<section class="research-library-grid onload-animation">
+		{libraryGroups.map((group) => (
+			<article class="research-library-card">
+				<div class="research-library-card-header">
+					<Icon is:inline name={group.icon} />
+					<div>
+						<strong>{group.title}</strong>
+						<span>{group.description}</span>
+					</div>
+				</div>
+				<div class="research-library-subfolders">
+					{group.items.map((item) => (
+						<a href={item.href}>
+							<Icon is:inline name="material-symbols:folder-outline-rounded" />
+							{item.title}
+						</a>
+					))}
+				</div>
+			</article>
 		))}
 	</section>
 
@@ -98,7 +131,7 @@ const categories = [
 
 <style>
 	.research-hero,
-	.research-topic-card,
+	.research-library-card,
 	.research-list,
 	.research-empty {
 		border: 1px solid var(--line-color);
@@ -166,41 +199,76 @@ const categories = [
 		font-size: 0.85rem;
 	}
 
-	.research-topic-grid {
+	.research-library-grid {
 		display: grid;
 		grid-template-columns: repeat(3, minmax(0, 1fr));
 		gap: 0.85rem;
 		margin-bottom: 1rem;
 	}
 
-	.research-topic-card {
+	.research-library-card {
 		display: flex;
 		flex-direction: column;
-		gap: 0.55rem;
+		gap: 0.9rem;
 		padding: 1rem;
-		text-decoration: none;
 		color: inherit;
-		transition: transform 0.2s ease, border-color 0.2s ease;
+		min-height: 100%;
 	}
 
-	.research-topic-card:hover {
-		transform: translateY(-2px);
-		border-color: color-mix(in srgb, var(--primary) 45%, var(--line-color));
+	.research-library-card-header {
+		display: flex;
+		align-items: flex-start;
+		gap: 0.8rem;
 	}
 
-	.research-topic-card svg {
+	.research-library-card-header > svg {
+		flex-shrink: 0;
 		font-size: 1.75rem;
 		color: var(--btn-content);
 	}
 
-	.research-topic-card strong {
+	.research-library-card strong {
+		display: block;
 		color: var(--deep-text);
+		font-size: 1.05rem;
 	}
 
-	.research-topic-card span {
+	.research-library-card span {
+		display: block;
+		margin-top: 0.35rem;
 		color: var(--content-meta);
 		font-size: 0.9rem;
 		line-height: 1.6;
+	}
+
+	.research-library-subfolders {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.5rem;
+	}
+
+	.research-library-subfolders a {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.35rem;
+		padding: 0.48rem 0.65rem;
+		border-radius: 0.55rem;
+		background: var(--btn-regular-bg);
+		color: var(--btn-content);
+		font-size: 0.86rem;
+		font-weight: 700;
+		line-height: 1.2;
+		text-decoration: none;
+		transition: background 0.2s ease, transform 0.2s ease;
+	}
+
+	.research-library-subfolders a:hover {
+		transform: translateY(-1px);
+		background: var(--btn-regular-bg-hover);
+	}
+
+	.research-library-subfolders svg {
+		font-size: 1rem;
 	}
 
 	.research-list {
@@ -284,7 +352,7 @@ const categories = [
 			grid-template-columns: 1fr;
 		}
 
-		.research-topic-grid {
+		.research-library-grid {
 			grid-template-columns: 1fr;
 		}
 

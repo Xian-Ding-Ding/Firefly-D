@@ -1,8 +1,8 @@
 ---
 title: VASP计算笔记
 published: 2026-07-03
-description: "从 OneMarkdown 同步的 VASP 结构优化、输入文件、运行与后处理笔记。"
-tags: ["VASP", "计算化学", "科研笔记", "OneMarkdown"]
+description: "VASP 结构优化、输入文件、运行与后处理笔记。"
+tags: ["VASP", "计算化学", "科研笔记"]
 category: VASP
 draft: false
 ---

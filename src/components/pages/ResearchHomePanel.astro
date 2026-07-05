@@ -4,6 +4,8 @@ import { getSortedPosts } from "@/utils/content-utils";
 import { url } from "@/utils/url-utils";
 
 const posts = await getSortedPosts();
+const bilibiliVideoUrl =
+	"https://space.bilibili.com/1799296979?spm_id_from=333.1007.0.0";
 const noteCount = posts.filter((post) => {
 	const text = [
 		post.data.title,
@@ -20,15 +22,16 @@ const cards = [
 	{
 		title: "Markdown 笔记",
 		value: `${noteCount} 篇`,
-		description: "VASP、Gaussian、计算化学资料集中整理。",
+		description: "化学工程、计算化学、机器学习笔记整理。",
 		href: url("/notes/"),
 		icon: "material-symbols:menu-book-outline-rounded",
 	},
 	{
 		title: "视频讲解",
-		value: "课程模块",
-		description: "放置本地视频或 B 站嵌入，适合课程复盘。",
-		href: url("/videos/"),
+		value: "B 站空间",
+		description: "课程和软件操作视频讲解会更新到 B 站。",
+		href: bilibiliVideoUrl,
+		external: true,
 		icon: "material-symbols:play-circle-outline-rounded",
 	},
 	{
@@ -58,7 +61,12 @@ const cards = [
 	</div>
 	<div class="research-home-grid">
 		{cards.map((card) => (
-			<a class="research-home-card" href={card.href}>
+			<a
+				class="research-home-card"
+				href={card.href}
+				target={card.external ? "_blank" : undefined}
+				rel={card.external ? "noopener noreferrer" : undefined}
+			>
 				<div class="research-home-card-icon">
 					<Icon is:inline name={card.icon} />
 				</div>
