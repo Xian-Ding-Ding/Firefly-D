@@ -18,6 +18,12 @@ import { url } from "@/utils/url-utils";
 import DropdownMenu from "./DropdownMenu.astro";
 import NavMenuPanel from "./NavMenuPanel.astro";
 
+declare global {
+	interface Window {
+		__bgPlayerToggle?: (() => void) | null;
+	}
+}
+
 const className = Astro.props.class;
 
 // 获取导航栏透明模式配置
@@ -228,7 +234,11 @@ function loadButtonScript() {
     let bgPlayerBtn = document.getElementById("bg-player-toggle");
     if (bgPlayerBtn) {
         bgPlayerBtn.onclick = function () {
-            window.dispatchEvent(new CustomEvent("bg-player-toggle"));
+            if (window.__bgPlayerToggle) {
+                window.__bgPlayerToggle();
+            } else {
+                window.dispatchEvent(new CustomEvent("bg-player-toggle"));
+            }
         };
         window.addEventListener("bg-player-state-change", function (e) {
             var ce = e as CustomEvent;
@@ -250,7 +260,7 @@ function loadButtonScript() {
         });
         // Swup 导航时同步播放按钮状态（BackgroundPlayer 可能被重建，也可能持久存在）
         function syncBgPlayerBtn() {
-            var playing = document.documentElement.hasAttribute("data-bg-video-playing");
+            var playing = document.documentElement.hasAttribute("data-bg-player-playing");
             var i18nPlay = bgPlayerBtn!.getAttribute("data-i18n-play") ?? "";
             var i18nPause = bgPlayerBtn!.getAttribute("data-i18n-pause") ?? "";
             var label = playing ? i18nPause : i18nPlay;
